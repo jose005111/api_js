@@ -1,5 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+// Outras configurações
+
+const app = express();
+app.use(express.json());
 
 // Ativa o CORS para todas as rotas
 app.use(cors({
@@ -7,9 +11,6 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }));
   
-// Outras configurações
-app.use(express.json());
-const app = express();
 require('dotenv').config();
 const delegadoRoutes = require('./routes/delegadoRoutes');
 const userRoutes = require('./routes/userRoutes');
