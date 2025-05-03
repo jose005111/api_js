@@ -21,7 +21,7 @@ exports.show = (req, res) => {
 // Criar novo delegado
 exports.create = (req, res) => {
   const { nome, orgao, atributo, observacao } = req.body;
-  if (!nome || !orgao || !atributo || !observacao) {
+  if (!nome || !orgao || !atributo) {
     return res.status(400).json({ error: 'Dados inválidos' });
   }
 
