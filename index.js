@@ -1,24 +1,29 @@
 const express = require('express');
 const cors = require('cors');
-// Outras configurações
+require('dotenv').config();
 
 const app = express();
-app.use(express.json());
 
-// Ativa o CORS para todas as rotas
+// Middleware
 app.use(cors({
-    origin: '*', // exemplo: seu frontend em Vite
+    origin: 'http://oficiais-qxhfnvouj-feliciano-rodinos-projects.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
   }));
   
-require('dotenv').config();
-const delegadoRoutes = require('./routes/delegadoRoutes');
-const userRoutes = require('./routes/userRoutes');
-require('./database/connection'); // garante conexão na inicialização
 
 app.use(express.json());
+
+// Banco de dados
+require('./database/connection');
+
+// Rotas
+const delegadoRoutes = require('./routes/delegadoRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 app.use('/delegados', delegadoRoutes);
 app.use('/users', userRoutes);
 
+// Inicia servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
