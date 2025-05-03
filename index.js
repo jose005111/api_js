@@ -6,7 +6,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'http://oficiais-qxhfnvouj-feliciano-rodinos-projects.vercel.app',
+    origin: 'https://formulario-oficiais-qxhfnvouj-feliciano-rodinos-projects.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   }));
