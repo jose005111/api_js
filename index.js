@@ -7,11 +7,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }));
   
-
 // Outras configurações
 app.use(express.json());
-
-const express = require('express');
 const app = express();
 require('dotenv').config();
 const delegadoRoutes = require('./routes/delegadoRoutes');
