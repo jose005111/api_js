@@ -4,26 +4,22 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
+// CORS configurado para aceitar seu frontend do Vercel
 app.use(cors({
-    origin: 'https://formulario-oficiais.vercel.app/',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-  }));
-  
+  origin: 'https://formulario-oficiais.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 app.use(express.json());
 
-// Banco de dados
 require('./database/connection');
 
-// Rotas
 const delegadoRoutes = require('./routes/delegadoRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 app.use('/delegados', delegadoRoutes);
 app.use('/users', userRoutes);
 
-// Inicia servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
