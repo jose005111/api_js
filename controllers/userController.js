@@ -20,13 +20,13 @@ exports.show = (req, res) => {
 
 // Criar novo usuário
 exports.create = (req, res) => {
-  const { nome, email, password } = req.body;
-  if (!nome || !email || !password) {
+  const { nome, email, password, nivel } = req.body;
+  if (!nome || !email || !password || !nivel) {
     return res.status(400).json({ error: 'Dados inválidos' });
   }
 
-  const sql = 'INSERT INTO users (nome, email, password) VALUES (?, ?, ?)';
-  db.query(sql, [nome, email, password], (err, result) => {
+  const sql = 'INSERT INTO users (nome, email, password, nivel) VALUES (?, ?, ?, ?)';
+  db.query(sql, [nome, email, password, nivel], (err, result) => {
     if (err) return res.status(500).json({ error: 'Erro ao criar usuário' });
 
     const insertedId = result.insertId;
@@ -40,7 +40,7 @@ exports.create = (req, res) => {
 // Atualizar usuário
 exports.update = (req, res) => {
   const { id } = req.params;
-  const {nome, email, password } = req.body;
+  const {nome, email, password, nivel } = req.body;
 
   const fields = [];
   const values = [];
@@ -48,6 +48,7 @@ exports.update = (req, res) => {
   if (nome) { fields.push('nome = ?'); values.push(nome); }
   if (email) { fields.push('email = ?'); values.push(email); }
   if (password) { fields.push('password = ?'); values.push(password); }
+  if (nivel) { fields.push('nivel = ?'); values.push(nivel); }
 
   if (fields.length === 0) {
     return res.status(400).json({ error: 'Dados inválidos' });
